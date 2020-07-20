@@ -10,16 +10,24 @@ namespace BookShopMemory
     {
         private readonly Book[] books = new[]
         {
-            new Book(1, "Art of Progaramming"),
-            new Book(2, "Refactoring"),
-            new Book(3, "C Programming Language")
+            new Book(1, "ISBN12312-31321", "D. Knut", "Art of Programming"),
+            new Book(2, "ISBN12312-31322", "M. Fowler", "Refactoring"),
+            new Book(3, "ISBN12312-31323", "B. Kernighan", "C Programming Language")
         };
 
-        public Book[] GetAllByTitle(string titlePart)
+        public Book[] GetAllByIsbn(string isbn)
         {
             return books
-                .Where(book => book.Title.Contains(titlePart))
-                .ToArray();
+               .Where(book => book.Isbn == isbn)
+               .ToArray();
+        }
+
+        public Book[] GetAllByTitleOrAuthor(string titleOrAuthor)
+        {
+            return books
+               .Where(book => book.Title.Contains(titleOrAuthor)
+                           || book.Author.Contains(titleOrAuthor))
+               .ToArray();
         }
     }
 }
